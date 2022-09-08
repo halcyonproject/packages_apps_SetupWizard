@@ -180,19 +180,6 @@
         </activity>
 
         <activity
-            android:name=".system.UpdateRecoveryActivity"
-            android:label="@string/activity_label_empty"
-            android:configChanges="mcc|mnc"
-            android:immersive="true"
-            android:exported="true"
-            android:windowSoftInputMode="stateAlwaysHidden">
-            <intent-filter>
-                <action android:name="org.lineageos.setupwizard.LINEAGE_RECOVERY_UPDATE" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
             android:name=".system.DeviceSpecificActivity"
             android:label="@string/activity_label_empty"
             android:immersive="true"
@@ -200,19 +187,6 @@
             android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="org.lineageos.setupwizard.DEVICE_SPECIFIC" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".settings.LineageSettingsActivity"
-            android:label="@string/activity_label_empty"
-            android:configChanges="mcc|mnc"
-            android:immersive="true"
-            android:exported="true"
-            android:windowSoftInputMode="stateAlwaysHidden">
-            <intent-filter>
-                <action android:name="org.lineageos.setupwizard.LINEAGE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -252,19 +226,6 @@
             android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="org.lineageos.setupwizard.LINEAGE_LOCKSCREEN_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".backup.RestoreIntroActivity"
-            android:label="@string/activity_label_empty"
-            android:configChanges="mcc|mnc"
-            android:immersive="true"
-            android:exported="true"
-            android:windowSoftInputMode="stateAlwaysHidden">
-            <intent-filter>
-                <action android:name="org.lineageos.setupwizard.LINEAGE_RESTORE_BACKUP" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

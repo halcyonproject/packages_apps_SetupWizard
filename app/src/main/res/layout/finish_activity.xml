@@ -24,18 +24,31 @@
         android:clipChildren="false"
         style="@style/SudContentFrame">
 
-        <ImageView
-            android:id="@+id/brand_logo"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0px"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:src="@drawable/logo"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:scaleX="1.2"
-            android:scaleY="1.2"
             android:gravity="center"
-            android:padding="@dimen/content_margin_left"/>
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/cool_branding_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="h."
+                style="@style/halcyonCoolBranding"/>
+
+            <TextView
+                android:id="@+id/finished_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/setup_finished_message"
+                android:paddingBottom="@dimen/welcome_content_container_padding_bottom"
+                style="@style/WelcomeSubTitle"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/swipe_hint"

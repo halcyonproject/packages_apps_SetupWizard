@@ -44,11 +44,28 @@
             android:paddingEnd="@dimen/welcome_content_container_padding_end">
 
             <TextView
+                android:id="@+id/cool_branding_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="h."
+                style="@style/halcyonCoolBranding"/>
+
+            <TextView
                 android:id="@+id/welcome_title"
                 style="@style/WelcomeTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hyphenationFrequency="none"
+                android:paddingBottom="@dimen/welcome_content_container_padding_bottom" />
+
+            <TextView
+                android:id="@+id/welcome_subtitle"
+                style="@style/WelcomeSubTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hyphenationFrequency="none"
+                android:text="@string/setup_subtitle_message"
                 android:paddingBottom="@dimen/welcome_content_container_padding_bottom" />
         </LinearLayout>
 

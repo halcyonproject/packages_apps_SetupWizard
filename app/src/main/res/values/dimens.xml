@@ -13,12 +13,15 @@
     <dimen name="location_text_margin_right">30dp</dimen>
     <dimen name="base_margin_top">0dp</dimen>
 
-    <dimen name="welcome_content_container_padding_bottom">30dp</dimen>
+    <dimen name="halcyon_logo_size">46sp</dimen>
+    <dimen name="welcome_content_container_padding_bottom">15dp</dimen>
     <dimen name="welcome_content_container_padding_end">24dp</dimen>
     <dimen name="welcome_content_container_padding_start">40dp</dimen>
-    <dimen name="welcome_title_text_size">56sp</dimen>
-    <dimen name="welcome_title_padding_bottom">16dp</dimen>
-    <dimen name="welcome_title_line_height">64dp</dimen>
+    <dimen name="welcome_title_text_size">32sp</dimen>
+    <dimen name="welcome_subtitle_text_size">14sp</dimen>
+    <dimen name="welcome_title_padding_bottom">4dp</dimen>
+    <dimen name="welcome_title_line_height">36sp</dimen>
+    <dimen name="welcome_accessibility_text_size">18sp</dimen>
 
     <dimen name="welcome_chip_text_size">14sp</dimen>
     <dimen name="welcome_chip_padding_horizontal">16dp</dimen>

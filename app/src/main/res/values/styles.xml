@@ -64,6 +64,22 @@
         <item name="cornerRadius">@dimen/welcome_footer_button_radius</item>
     </style>
 
+    <style name="WelcomeSubTitle">
+        <item name="android:textSize">@dimen/welcome_subtitle_text_size</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="android:gravity">start</item>
+        <item name="android:paddingBottom">@dimen/welcome_title_padding_bottom</item>
+        <item name="android:lineHeight">@dimen/welcome_title_line_height</item>
+    </style>
+
+    <style name="halcyonCoolBranding">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">32dp</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:fontFamily">@font/google_sans_bold</item>
+        <item name="android:paddingBottom">@dimen/welcome_title_padding_bottom</item>
+    </style>
+
     <style name="EdgeToEdgeWallpaperBackground" parent="Theme.Setup">
         <item name="android:windowShowWallpaper">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>

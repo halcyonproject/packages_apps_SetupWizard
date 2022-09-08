@@ -1,5 +1,6 @@
 /*
  * SPDX-FileCopyrightText: The LineageOS Project
+ * SPDX-FileCopyrightText: 2022-2025 The LeafOS Project
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -7,8 +8,11 @@ package org.lineageos.setupwizard.settings
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.content.Context
 import android.os.Bundle
+import android.os.SystemProperties
 import android.os.UserHandle
+import android.provider.Settings
 import android.view.View
 import android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON_OVERLAY
 import android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL_OVERLAY
@@ -16,11 +20,8 @@ import android.widget.CheckBox
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import com.airbnb.lottie.LottieAnimationView
-import lineageos.providers.LineageSettings
-import org.lineageos.internal.util.DeviceKeysConstants.KEY_MASK_APP_SWITCH
 import org.lineageos.setupwizard.R
 import org.lineageos.setupwizard.SetupWizardApp
-import org.lineageos.setupwizard.SetupWizardApp.Companion.DISABLE_NAV_KEYS
 import org.lineageos.setupwizard.SetupWizardApp.Companion.NAVIGATION_OPTION_KEY
 import org.lineageos.setupwizard.base.BaseSetupWizardActivity
 import org.lineageos.setupwizard.util.SetupWizardUtils
@@ -34,13 +35,7 @@ class NavigationSettingsActivity : BaseSetupWizardActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val navBarEnabled = SetupWizardApp.settingsBundle.getBoolean(DISABLE_NAV_KEYS, false)
-
-        val deviceKeys =
-            resources.getInteger(
-                org.lineageos.platform.internal.R.integer.config_deviceHardwareKeys
-            )
-        val hasHomeKey = (deviceKeys and KEY_MASK_APP_SWITCH) != 0
+        val navBarEnabled = hasNavigationBar(this)
 
         glifLayout.setDescriptionText(getString(R.string.navigation_summary))
         setNextText(R.string.next)
@@ -57,7 +52,7 @@ class NavigationSettingsActivity : BaseSetupWizardActivity() {
             available--
         }
 
-        if (!navBarEnabled && hasHomeKey || available <= 1) {
+        if (!navBarEnabled || available <= 1) {
             SetupWizardApp.settingsBundle.putString(
                 NAVIGATION_OPTION_KEY,
                 NAV_BAR_MODE_3BUTTON_OVERLAY,
@@ -121,9 +116,9 @@ class NavigationSettingsActivity : BaseSetupWizardActivity() {
     override fun onNextPressed() {
         SetupWizardApp.settingsBundle.putString(NAVIGATION_OPTION_KEY, selection)
         val hideHint = hideGesturalHint.isChecked
-        LineageSettings.System.putIntForUser(
+        Settings.System.putIntForUser(
             contentResolver,
-            LineageSettings.System.NAVIGATION_BAR_HINT,
+            Settings.System.NAVIGATION_BAR_HINT,
             if (hideHint) 0 else 1,
             UserHandle.USER_CURRENT,
         )
@@ -135,4 +130,13 @@ class NavigationSettingsActivity : BaseSetupWizardActivity() {
     override val titleResId: Int = R.string.setup_navigation
 
     override val iconResId: Int = R.drawable.ic_navigation
+
+    companion object {
+        fun hasNavigationBar(context: Context): Boolean {
+            val resources = context.resources
+            val resIdShow = resources.getIdentifier("config_showNavigationBar", "bool", "android")
+            val hasNavigationBar = if (resIdShow > 0) resources.getBoolean(resIdShow) else false
+            return hasNavigationBar || "1" == SystemProperties.get("qemu.hw.mainkeys")
+        }
+    }
 }
