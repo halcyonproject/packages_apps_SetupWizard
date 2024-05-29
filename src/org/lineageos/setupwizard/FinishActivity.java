@@ -11,8 +11,6 @@ import static android.os.Binder.getCallingUserHandle;
 import static android.os.UserHandle.USER_CURRENT;
 
 import static org.lineageos.setupwizard.Manifest.permission.FINISH_SETUP;
-import static org.lineageos.setupwizard.SetupWizardApp.ACTION_FINISHED;
-import static org.lineageos.setupwizard.SetupWizardApp.ACTION_SETUP_COMPLETE;
 import static org.lineageos.setupwizard.SetupWizardApp.LOGV;
 import static org.lineageos.setupwizard.SetupWizardApp.NAVIGATION_OPTION_KEY;
 
