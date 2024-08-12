@@ -7,8 +7,8 @@ package org.lineageos.setupwizard;
 
 import static com.google.android.setupcompat.util.ResultCodes.RESULT_ACTIVITY_NOT_FOUND;
 
-import static org.lineageos.setupwizard.SetupWizardApp.EXTRA_ACTION_ID;
 import static org.lineageos.setupwizard.SetupWizardApp.EXTRA_SCRIPT_URI;
+import static org.lineageos.setupwizard.SetupWizardApp.EXTRA_WIZARD_BUNDLE;
 import static org.lineageos.setupwizard.SetupWizardApp.LOGV;
 
 import android.annotation.NonNull;
@@ -18,8 +18,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.activity.result.ActivityResult;
-
-import com.google.android.setupdesign.transition.TransitionHelper;
+import androidx.activity.result.ActivityResultLauncher;
 
 public abstract class SubBaseActivity extends BaseSetupWizardActivity {
 
@@ -28,6 +27,11 @@ public abstract class SubBaseActivity extends BaseSetupWizardActivity {
     protected boolean mIsSubactivityNotFound = false;
 
     protected abstract void onStartSubactivity();
+
+    private final ActivityResultLauncher<Intent> mSubactivityResultLauncher =
+            registerForActivityResult(
+                    new StartDecoratedActivityForResult(),
+                    SubBaseActivity.this::onSubactivityResult);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +62,12 @@ public abstract class SubBaseActivity extends BaseSetupWizardActivity {
 
     protected void startSubactivity(Intent subactivityIntent) {
         Intent intent = getIntent();
-        if (intent.hasExtra(EXTRA_SCRIPT_URI)) {
-            subactivityIntent.putExtra(EXTRA_SCRIPT_URI, intent.getStringExtra(EXTRA_SCRIPT_URI));
-            subactivityIntent.putExtra(EXTRA_ACTION_ID, intent.getStringExtra(EXTRA_ACTION_ID));
+        Bundle wizardBundle = intent.getBundleExtra(EXTRA_WIZARD_BUNDLE);
+        if (wizardBundle.containsKey(EXTRA_SCRIPT_URI)) {
+            subactivityIntent.putExtra(EXTRA_WIZARD_BUNDLE, wizardBundle);
         }
         try {
-            startActivityForResult(subactivityIntent);
+            mSubactivityResultLauncher.launch(subactivityIntent);
         } catch (ActivityNotFoundException e) {
             Log.w(TAG, "activity not found; start next screen and finish; intent=" + intent);
             mIsSubactivityNotFound = true;
@@ -72,8 +76,17 @@ public abstract class SubBaseActivity extends BaseSetupWizardActivity {
     }
 
     @Override
-    protected void onActivityResult(ActivityResult activityResult) {
-        super.onActivityResult(activityResult);
+    protected void onNextIntentResult(@NonNull ActivityResult activityResult) {
+        super.onNextIntentResult(activityResult);
+        int resultCode = activityResult.getResultCode();
+        Intent data = activityResult.getData();
+        if (resultCode == RESULT_CANCELED && data != null
+                && data.getBooleanExtra("onBackPressed", false)) {
+            onStartSubactivity();
+        }
+    }
+
+    protected void onSubactivityResult(@NonNull ActivityResult activityResult) {
         int resultCode = activityResult.getResultCode();
         Intent data = activityResult.getData();
         if (resultCode != RESULT_CANCELED) {
@@ -82,8 +95,6 @@ public abstract class SubBaseActivity extends BaseSetupWizardActivity {
             finishAction(RESULT_ACTIVITY_NOT_FOUND);
         } else if (data != null && data.getBooleanExtra("onBackPressed", false)) {
             onStartSubactivity();
-            TransitionHelper.applyBackwardTransition(this,
-                    TransitionHelper.TRANSITION_FADE_THROUGH, true);
         } else {
             finishAction(RESULT_CANCELED);
         }

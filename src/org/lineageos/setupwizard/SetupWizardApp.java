@@ -27,6 +27,7 @@ public class SetupWizardApp extends Application {
     public static final String ACTION_EMERGENCY_DIAL = "com.android.phone.EmergencyDialer.DIAL";
     public static final String ACTION_LOAD = "com.android.wizard.LOAD";
 
+    public static final String EXTRA_WIZARD_BUNDLE = "wizardBundle";
     public static final String EXTRA_SCRIPT_URI = "scriptUri";
     public static final String EXTRA_ACTION_ID = "actionId";
     public static final String EXTRA_RESULT_CODE = "com.android.setupwizard.ResultCode";
@@ -56,7 +57,6 @@ public class SetupWizardApp extends Application {
         if (LOGV) {
             Log.v(TAG, "onCreate()");
         }
-        SetupWizardUtils.disableComponentsForMissingFeatures(this);
         sStatusBarManager = SetupWizardUtils.disableStatusBar(this);
         mHandler.postDelayed(mRadioTimeoutRunnable, SetupWizardApp.RADIO_READY_TIMEOUT);
         if (SetupWizardUtils.hasGMS(this)) {
