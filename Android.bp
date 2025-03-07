@@ -5,7 +5,7 @@
 //
 
 android_app {
-    name: "LeafSetupWizard",
+    name: "SetupWizard",
 
     srcs: ["src/**/*.java"],
 

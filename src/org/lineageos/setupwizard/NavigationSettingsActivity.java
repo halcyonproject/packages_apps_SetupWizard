@@ -169,8 +169,8 @@ public class NavigationSettingsActivity extends BaseSetupWizardActivity {
         mSetupWizardApp.getSettingsBundle().putString(NAVIGATION_OPTION_KEY, mSelection);
         if (!mIsTaskbarEnabled) {
             boolean hideHint = mHideGesturalHint.isChecked();
-            Settings.Secure.putIntForUser(getContentResolver(),
-                    Settings.Secure.NAVIGATION_BAR_HINT, hideHint ? 0 : 1,
+            Settings.System.putIntForUser(getContentResolver(),
+                    Settings.System.NAVIGATION_BAR_HINT, hideHint ? 0 : 1,
                     UserHandle.USER_CURRENT);
         }
         super.onNextPressed();

@@ -22,8 +22,6 @@ public class SetupWizardApp extends Application {
     // Verbose logging
     public static final boolean LOGV = Log.isLoggable(TAG, Log.VERBOSE);
 
-    public static final String ACTION_RESTORE_FROM_BACKUP =
-            "com.stevesoltys.seedvault.RESTORE_BACKUP";
     public static final String ACTION_EMERGENCY_DIAL = "com.android.phone.EmergencyDialer.DIAL";
     public static final String ACTION_LOAD = "com.android.wizard.LOAD";
 
