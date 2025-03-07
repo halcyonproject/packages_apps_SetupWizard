@@ -8,7 +8,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -26,13 +25,32 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:gravity="center"
         style="@style/SudContentFrame">
 
-        <org.lineageos.setupwizard.NavigationLayout
-            android:id="@+id/navigation_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/cool_branding_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="h."
+            style="@style/halcyonCoolBranding"/>
+
+        <TextView
+            android:id="@+id/finished_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/setup_finished_message"
+            android:paddingBottom="@dimen/welcome_content_container_padding_bottom"
+            style="@style/WelcomeSubTitle"/>
 
     </LinearLayout>
+
+    <org.lineageos.setupwizard.NavigationLayout
+        android:id="@+id/navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"/>
 
 </android.widget.FrameLayout>

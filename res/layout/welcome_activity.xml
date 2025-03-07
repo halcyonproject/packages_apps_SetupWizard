@@ -50,11 +50,28 @@
                 android:paddingBottom="@dimen/welcome_content_container_padding_bottom">
 
                 <TextView
+                    android:id="@+id/cool_branding_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:text="h."
+                    style="@style/halcyonCoolBranding"/>
+
+                <TextView
                     style="@style/WelcomeTitle"
                     android:id="@+id/welcome_title"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:hyphenationFrequency="none"
+                    android:paddingBottom="@dimen/welcome_content_container_padding_bottom" />
+
+                <TextView
+                    style="@style/WelcomeSubTitle"
+                    android:id="@+id/welcome_subtitle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hyphenationFrequency="none"
+                    android:text="@string/setup_subtitle_message"
                     android:paddingBottom="@dimen/welcome_content_container_padding_bottom" />
 
                 <LinearLayout
