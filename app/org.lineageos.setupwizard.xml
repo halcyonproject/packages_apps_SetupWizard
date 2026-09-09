@@ -16,5 +16,10 @@
         <permission name="android.permission.SET_TIME_ZONE" />
         <permission name="android.permission.STATUS_BAR" />
         <permission name="android.permission.WRITE_SECURE_SETTINGS" />
+        <permission name="lineageos.permission.FINISH_SETUP" />
+        <permission name="lineageos.permission.HARDWARE_ABSTRACTION_ACCESS" />
+        <permission name="lineageos.permission.WRITE_SECURE_SETTINGS" />
+        <permission name="lineageos.permission.WRITE_SETTINGS" />
     </privapp-permissions>
 </permissions>
+
