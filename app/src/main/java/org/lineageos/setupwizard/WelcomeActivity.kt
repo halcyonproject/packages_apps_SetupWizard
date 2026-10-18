@@ -1,30 +1,43 @@
 /*
  * SPDX-FileCopyrightText: 2016 The CyanogenMod Project
  * SPDX-FileCopyrightText: The LineageOS Project
+ * SPDX-FileCopyrightText: 2026 The Halcyon Project
  * SPDX-License-Identifier: Apache-2.0
  */
+
 package org.lineageos.setupwizard
 
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.View
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
-import com.google.android.material.button.MaterialButton
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.android.internal.app.LocaleHelper
 import com.google.android.setupcompat.util.SystemBarHelper
-import com.google.android.setupdesign.R as SudR
-import com.google.android.setupdesign.template.FloatingActionButtonMixin
-import com.google.android.setupdesign.template.FloatingBackButtonMixin
+import java.util.Locale
 import org.lineageos.setupwizard.SetupWizardApp.Companion.ACTION_EMERGENCY_DIAL
 import org.lineageos.setupwizard.base.SubBaseActivity
 import org.lineageos.setupwizard.util.SetupWizardUtils
 
 class WelcomeActivity : SubBaseActivity() {
 
+    private var welcomeTheme: Resources.Theme? = null
+
     override fun onStartSubactivity() {
         // no-op
+    }
+
+    override fun getTheme(): Resources.Theme {
+        val theme = super.getTheme()
+        if (welcomeTheme == null) {
+            theme.applyStyle(R.style.Theme_Setup_Welcome, true)
+            welcomeTheme = theme
+        }
+        return welcomeTheme!!
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,8 +52,10 @@ class WelcomeActivity : SubBaseActivity() {
             },
         )
 
+        setupInsets()
         setupEmergencyCallButton()
         setupSkipButton()
+        setupLanguageSelector()
 
         findViewById<View>(R.id.start).setOnClickListener { onNextPressed() }
         findViewById<View>(R.id.launch_accessibility).setOnClickListener {
@@ -56,50 +71,69 @@ class WelcomeActivity : SubBaseActivity() {
             }
     }
 
-    private fun MaterialButton.applyChipStyle(label: CharSequence) {
-        text = label
-        contentDescription = null
-        setTextSize(
-            TypedValue.COMPLEX_UNIT_PX,
-            resources.getDimension(R.dimen.welcome_chip_text_size),
-        )
-        iconTint?.let { setTextColor(it) }
-        minWidth = 0
-        val horizontalPadding =
-            resources.getDimensionPixelSize(R.dimen.welcome_chip_padding_horizontal)
-        setPadding(horizontalPadding, paddingTop, horizontalPadding, paddingBottom)
+    override fun onResume() {
+        super.onResume()
+        updateLanguageSelector()
+    }
+
+    private fun setupInsets() {
+        val container = findViewById<View>(R.id.welcome_container) ?: return
+        ViewCompat.setOnApplyWindowInsetsListener(container) { view, windowInsets ->
+            val insets = windowInsets.getInsets(
+                WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
+            )
+            val horizontalPadding =
+                resources.getDimensionPixelSize(R.dimen.welcome_page_padding_horizontal)
+            view.setPadding(
+                horizontalPadding + insets.left,
+                insets.top,
+                horizontalPadding + insets.right,
+                insets.bottom
+            )
+            windowInsets
+        }
     }
 
     private fun setupSkipButton() {
-        val mixin = glifLayout.getMixin(FloatingActionButtonMixin::class.java)
+        val skipButton = findViewById<View>(R.id.skip_button) ?: return
         if (Build.TYPE != "eng") {
-            mixin.visibility = View.GONE
+            skipButton.visibility = View.GONE
             return
         }
-        mixin.visibility = View.VISIBLE
-        mixin.onClickListener =
-            View.OnClickListener { SetupWizardUtils.finishSetupWizard(this@WelcomeActivity) }
-        mixin.actionButton?.applyChipStyle(getString(R.string.skip))
+        skipButton.visibility = View.VISIBLE
+        skipButton.setOnClickListener {
+            SetupWizardUtils.finishSetupWizard(this@WelcomeActivity)
+        }
     }
 
     private fun setupEmergencyCallButton() {
-        val mixin = glifLayout.getMixin(FloatingBackButtonMixin::class.java)
+        val emergencyButton = findViewById<View>(R.id.emergency_call) ?: return
         if (!SetupWizardUtils.hasTelephony(this)) {
-            mixin.setVisibility(View.GONE)
+            emergencyButton.visibility = View.GONE
             return
         }
-        mixin.setVisibility(View.VISIBLE)
-        mixin.setOnClickListener { startSubactivity(Intent(ACTION_EMERGENCY_DIAL)) }
-
-        val button =
-            glifLayout.findManagedViewById<MaterialButton>(SudR.id.sud_floating_back_button)
-                ?: return
-        button.apply {
-            setIconResource(R.drawable.ic_emergency_dial)
-            iconSize = resources.getDimensionPixelSize(R.dimen.welcome_emergency_icon_size)
-            iconPadding = resources.getDimensionPixelSize(R.dimen.welcome_emergency_icon_padding)
-            applyChipStyle(getString(R.string.emergency_call))
+        emergencyButton.visibility = View.VISIBLE
+        emergencyButton.setOnClickListener {
+            startSubactivity(Intent(ACTION_EMERGENCY_DIAL))
         }
+    }
+
+    private fun setupLanguageSelector() {
+        val languageSelector = findViewById<View>(R.id.language_selector) ?: return
+        languageSelector.setOnClickListener {
+            val existing = supportFragmentManager.findFragmentByTag(LanguagePickerDialogFragment.TAG)
+            if (existing == null) {
+                LanguagePickerDialogFragment.newInstance()
+                    .show(supportFragmentManager, LanguagePickerDialogFragment.TAG)
+            }
+        }
+        updateLanguageSelector()
+    }
+
+    private fun updateLanguageSelector() {
+        val currentLanguageView = findViewById<TextView>(R.id.current_language) ?: return
+        val currentLocale = Locale.getDefault()
+        currentLanguageView.text = LocaleHelper.getDisplayName(currentLocale, currentLocale, true)
     }
 
     override val layoutResId: Int = R.layout.welcome_activity

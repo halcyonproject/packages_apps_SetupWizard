@@ -13,36 +13,41 @@
     <dimen name="location_text_margin_right">30dp</dimen>
     <dimen name="base_margin_top">0dp</dimen>
 
-    <dimen name="halcyon_logo_size">46sp</dimen>
+    <dimen name="halcyon_logo_size">40sp</dimen>
+    <dimen name="welcome_logo_size">32sp</dimen>
+    <dimen name="welcome_page_padding_horizontal">32dp</dimen>
+    <dimen name="welcome_shapes_height">22dp</dimen>
     <dimen name="welcome_content_container_padding_bottom">15dp</dimen>
     <dimen name="welcome_content_container_padding_end">24dp</dimen>
     <dimen name="welcome_content_container_padding_start">40dp</dimen>
-    <dimen name="welcome_title_text_size">32sp</dimen>
-    <dimen name="welcome_subtitle_text_size">14sp</dimen>
+    <dimen name="welcome_title_text_size">36sp</dimen>
+    <dimen name="welcome_subtitle_text_size">15sp</dimen>
     <dimen name="welcome_title_padding_bottom">4dp</dimen>
-    <dimen name="welcome_title_line_height">36sp</dimen>
+    <dimen name="welcome_title_line_height">44sp</dimen>
+    <dimen name="welcome_language_text_size">15sp</dimen>
     <dimen name="welcome_accessibility_text_size">18sp</dimen>
 
     <dimen name="welcome_chip_text_size">14sp</dimen>
     <dimen name="welcome_chip_padding_horizontal">16dp</dimen>
     <dimen name="welcome_emergency_icon_padding">8dp</dimen>
     <dimen name="welcome_emergency_icon_size">18dp</dimen>
-    <dimen name="welcome_footer_button_size">72dp</dimen>
-    <dimen name="welcome_footer_button_radius">36dp</dimen>
+    <dimen name="welcome_emergency_pill_radius">20dp</dimen>
+    <dimen name="welcome_footer_button_size">56dp</dimen>
+    <dimen name="welcome_footer_button_radius">28dp</dimen>
     <dimen name="welcome_footer_button_spacing">16dp</dimen>
     <dimen name="welcome_start_button_text_size">18sp</dimen>
-    <dimen name="welcome_start_button_icon_size">24dp</dimen>
+    <dimen name="welcome_start_button_icon_size">22dp</dimen>
     <dimen name="welcome_start_button_icon_padding">12dp</dimen>
-    <dimen name="welcome_accessibility_icon_size">28dp</dimen>
+    <dimen name="welcome_accessibility_icon_size">24dp</dimen>
+
+    <dimen name="welcome_dialog_corner_radius">28dp</dimen>
+    <dimen name="welcome_dialog_item_min_height">56dp</dimen>
 
     <dimen name="setup_compat_footer_button_radius">@dimen/sud_glif_expressive_footer_button_radius</dimen>
     <dimen name="setup_design_items_group_corner_radius">20dp</dimen>
 
-    <dimen name="swipe_hint_icon_size">67dp</dimen>
-    <dimen name="swipe_hint_text_margin_top">12dp</dimen>
     <dimen name="swipe_hint_text_size">17sp</dimen>
     <dimen name="swipe_hint_padding_bottom">24dp</dimen>
-    <dimen name="swipe_hint_icon_rise">24dp</dimen>
     <dimen name="swipe_hint_text_rise">12dp</dimen>
 
     <dimen name="time_zone_item_padding_vertical">8dp</dimen>

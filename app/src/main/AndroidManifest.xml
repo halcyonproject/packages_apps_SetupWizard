@@ -104,25 +104,13 @@
         <activity
             android:name=".WelcomeActivity"
             android:label="@string/activity_label_empty"
+            android:theme="@style/Theme.Setup.Welcome"
             android:configChanges="mcc|mnc"
             android:immersive="true"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="org.lineageos.setupwizard.LINEAGE_WELCOME" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".locale.LocaleActivity"
-            android:label="@string/activity_label_empty"
-            android:configChanges="mcc|mnc"
-            android:immersive="true"
-            android:exported="false"
-            android:windowSoftInputMode="stateAlwaysHidden">
-            <intent-filter>
-                <action android:name="org.lineageos.setupwizard.LINEAGE_LOCALE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

@@ -31,6 +31,7 @@ android_app {
 
     static_libs: [
         "androidx.activity_activity",
+        "androidx.recyclerview_recyclerview",
         "SettingsLib",
         "setupcompat",
         "setupdesign",

@@ -60,19 +60,10 @@
             android:gravity="center_horizontal"
             android:paddingBottom="@dimen/swipe_hint_padding_bottom">
 
-            <ImageView
-                android:id="@+id/swipe_hint_icon"
-                android:layout_width="@dimen/swipe_hint_icon_size"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:src="@drawable/ic_swipe_up"
-                android:contentDescription="@null" />
-
             <TextView
                 android:id="@+id/swipe_hint_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/swipe_hint_text_margin_top"
                 android:text="@string/swipe_up_to_go_home"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
                 android:textSize="@dimen/swipe_hint_text_size" />

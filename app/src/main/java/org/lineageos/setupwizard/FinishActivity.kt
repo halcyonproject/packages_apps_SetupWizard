@@ -38,7 +38,6 @@ class FinishActivity : BaseSetupWizardActivity() {
 
     private var rootView: View? = null
     private var swipeHint: View? = null
-    private var swipeHintIcon: View? = null
     private var swipeHintText: View? = null
     private var background: RevealHoleView? = null
     private var brandLogo: View? = null
@@ -79,7 +78,6 @@ class FinishActivity : BaseSetupWizardActivity() {
 
         rootView = findViewById(R.id.root)
         swipeHint = findViewById(R.id.swipe_hint)
-        swipeHintIcon = findViewById(R.id.swipe_hint_icon)
         swipeHintText = findViewById(R.id.swipe_hint_text)
         background = findViewById(R.id.background)
         brandLogo = findViewById(R.id.brand_logo)
@@ -181,10 +179,6 @@ class FinishActivity : BaseSetupWizardActivity() {
             scaleY = scale
         }
         val fade = 1f - progress
-        swipeHintIcon?.let {
-            it.translationY = -rise(R.dimen.swipe_hint_icon_rise) * progress
-            it.alpha = fade
-        }
         swipeHintText?.let {
             it.translationY = -rise(R.dimen.swipe_hint_text_rise) * progress
             it.alpha = fade

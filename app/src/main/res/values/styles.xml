@@ -10,30 +10,7 @@
         <item name="sudUsePartnerHeavyTheme">true</item>
     </style>
 
-    <style name="SpinnerItem">
-        <item name="android:textSize">15sp</item>
-        <item name="android:paddingLeft">@dimen/content_margin_left</item>
-    </style>
 
-    <style name="LocaleWidget">
-        <item name="android:textAppearance">?android:attr/textAppearance</item>
-    </style>
-
-    <style name="LocaleWidget.LocalePicker">
-        <item name="android:orientation">vertical</item>
-        <item name="android:fadingEdge">vertical</item>
-        <item name="android:fadingEdgeLength">50dip</item>
-    </style>
-
-    <style name="LocaleWidget.Material.LocalePicker" parent="LocaleWidget.LocalePicker">
-        <item name="solidColor">@android:color/transparent</item>
-        <item name="selectionDivider">@drawable/divider</item>
-        <item name="selectionDividerHeight">1dip</item>
-        <item name="internalLayout">@layout/locale_picker</item>
-        <item name="internalMinWidth">64dip</item>
-        <item name="internalMaxHeight">180dip</item>
-        <item name="virtualButtonPressedDrawable">@null</item>
-    </style>
 
     <style name="NoDisplay" parent="@style/Theme.AppCompat">
         <item name="android:windowBackground">@null</item>
@@ -50,6 +27,8 @@
         <item name="android:gravity">start</item>
         <item name="android:paddingBottom">@dimen/welcome_title_padding_bottom</item>
         <item name="android:lineHeight">@dimen/welcome_title_line_height</item>
+        <item name="android:fontFamily">@font/google_sans_bold</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="WelcomeIconButton" parent="Widget.Material3.Button.IconButton.Outlined">
@@ -68,16 +47,14 @@
         <item name="android:textSize">@dimen/welcome_subtitle_text_size</item>
         <item name="android:textColor">?android:textColorSecondary</item>
         <item name="android:gravity">start</item>
-        <item name="android:paddingBottom">@dimen/welcome_title_padding_bottom</item>
-        <item name="android:lineHeight">@dimen/welcome_title_line_height</item>
+        <item name="android:lineHeight">22sp</item>
     </style>
 
     <style name="halcyonCoolBranding">
         <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:textSize">32dp</item>
-        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">@dimen/halcyon_logo_size</item>
+        <item name="android:textStyle">bold|italic</item>
         <item name="android:fontFamily">@font/google_sans_bold</item>
-        <item name="android:paddingBottom">@dimen/welcome_title_padding_bottom</item>
     </style>
 
     <style name="EdgeToEdgeWallpaperBackground" parent="Theme.Setup">
@@ -86,5 +63,18 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">?attr/android:windowBackground</item>
         <item name="android:navigationBarColor">?attr/android:windowBackground</item>
+    </style>
+
+    <style name="Theme.Setup.Welcome" parent="EdgeToEdgeWallpaperBackground">
+        <item name="android:windowShowWallpaper">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.Setup.LanguageDialog" parent="ThemeOverlay.Material3.Dialog">
+        <item name="android:windowBackground">@drawable/dialog_background_material</item>
+        <item name="android:colorBackgroundFloating">?android:attr/colorBackgroundFloating</item>
     </style>
 </resources>

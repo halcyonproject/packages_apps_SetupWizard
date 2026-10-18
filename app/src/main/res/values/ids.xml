@@ -4,7 +4,9 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources>
+    <item name="brand_logo" type="id" />
     <item name="localepicker_input" type="id" />
     <item name="lp__increment" type="id" />
     <item name="lp__decrement" type="id" />
 </resources>
+

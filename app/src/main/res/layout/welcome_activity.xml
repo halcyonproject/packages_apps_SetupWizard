@@ -1,110 +1,241 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
      SPDX-FileCopyrightText: 2016 The CyanogenMod Project
-     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-FileCopyrightText: 2026 The Halcyon Project
      SPDX-License-Identifier: Apache-2.0
 -->
-<com.google.android.setupdesign.GlifLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/setup_wizard_layout"
+    android:id="@+id/welcome_root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
 
-    <LinearLayout
+    <View
+        android:id="@+id/wallpaper_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="?android:attr/colorBackground"
+        android:alpha="0.30"
+        android:importantForAccessibility="no" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2" />
-
-        <com.google.android.setupdesign.view.SudLottieAnimationView
-            android:id="@+id/brand_logo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/lottie_welcome" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5" />
+    <ScrollView
+        android:id="@+id/welcome_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:overScrollMode="never">
 
         <LinearLayout
-            style="@style/SudContentFrame"
+            android:id="@+id/welcome_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingStart="@dimen/welcome_content_container_padding_start"
-            android:paddingEnd="@dimen/welcome_content_container_padding_end">
+            android:paddingStart="@dimen/welcome_page_padding_horizontal"
+            android:paddingEnd="@dimen/welcome_page_padding_horizontal"
+            android:clipToPadding="false">
 
-            <TextView
-                android:id="@+id/cool_branding_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:text="h."
-                style="@style/halcyonCoolBranding"/>
-
-            <TextView
-                android:id="@+id/welcome_title"
-                style="@style/WelcomeTitle"
+            <!-- Top bar: Emergency Call & Skip (eng) -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hyphenationFrequency="none"
-                android:paddingBottom="@dimen/welcome_content_container_padding_bottom" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="16dp">
 
-            <TextView
-                android:id="@+id/welcome_subtitle"
-                style="@style/WelcomeSubTitle"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/emergency_call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="40dp"
+                    app:cornerRadius="@dimen/welcome_emergency_pill_radius"
+                    app:backgroundTint="@color/welcome_emergency_bg"
+                    app:strokeWidth="0dp"
+                    android:textColor="?android:attr/textColorPrimary"
+                    app:icon="@drawable/ic_emergency_dial"
+                    app:iconTint="?android:attr/textColorPrimary"
+                    app:iconSize="@dimen/welcome_emergency_icon_size"
+                    app:iconGravity="textStart"
+                    app:iconPadding="@dimen/welcome_emergency_icon_padding"
+                    android:text="@string/emergency_call"
+                    android:textSize="@dimen/welcome_chip_text_size"
+                    android:textAllCaps="false"
+                    android:paddingStart="@dimen/welcome_chip_padding_horizontal"
+                    android:paddingEnd="@dimen/welcome_chip_padding_horizontal"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/skip_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="40dp"
+                    app:cornerRadius="@dimen/welcome_emergency_pill_radius"
+                    app:backgroundTint="@color/welcome_emergency_bg"
+                    app:strokeWidth="0dp"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:text="@string/skip"
+                    android:textSize="@dimen/welcome_chip_text_size"
+                    android:textAllCaps="false"
+                    android:paddingStart="@dimen/welcome_chip_padding_horizontal"
+                    android:paddingEnd="@dimen/welcome_chip_padding_horizontal"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <!-- Flexible vertical space pushing content down -->
+            <Space
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hyphenationFrequency="none"
-                android:text="@string/setup_subtitle_message"
-                android:paddingBottom="@dimen/welcome_content_container_padding_bottom" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingStart="?attr/sucFooterBarPaddingStart"
-            android:paddingEnd="?attr/sucFooterBarPaddingEnd"
-            android:paddingTop="?attr/sucFooterBarPaddingTop"
-            android:paddingBottom="?attr/sucFooterBarPaddingBottom">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/launch_accessibility"
-                style="@style/WelcomeIconButton"
-                android:layout_width="@dimen/welcome_footer_button_size"
-                android:layout_height="@dimen/welcome_footer_button_size"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="@dimen/welcome_footer_button_spacing"
-                android:contentDescription="@string/accessibility_settings"
-                app:icon="@drawable/ic_accessibility"
-                app:iconSize="@dimen/welcome_accessibility_icon_size"
-                app:iconTint="?attr/colorOnSurface" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/start"
-                style="?attr/materialButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:minHeight="@dimen/welcome_footer_button_size"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:text="@string/start"
-                android:textSize="@dimen/welcome_start_button_text_size"
-                app:icon="@drawable/ic_arrow_forward"
-                app:iconGravity="textStart"
-                app:iconPadding="@dimen/welcome_start_button_icon_padding"
-                app:iconSize="@dimen/welcome_start_button_icon_size" />
+                android:minHeight="32dp" />
+
+            <!-- Content block -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Logo row: "h." text + shapes -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/branding_text"
+                        style="@style/halcyonCoolBranding"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:textSize="@dimen/welcome_logo_size"
+                        android:text="h." />
+
+                    <ImageView
+                        android:id="@+id/welcome_shapes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/welcome_shapes_height"
+                        android:layout_marginStart="12dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/ic_welcome_shapes"
+                        android:contentDescription="@null" />
+                </LinearLayout>
+
+                <!-- Title -->
+                <TextView
+                    android:id="@+id/welcome_title"
+                    style="@style/WelcomeTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:includeFontPadding="false"
+                    android:hyphenationFrequency="none" />
+
+                <!-- Subtitle -->
+                <TextView
+                    android:id="@+id/welcome_subtitle"
+                    style="@style/WelcomeSubTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/setup_subtitle_message"
+                    android:hyphenationFrequency="none" />
+
+                <!-- Language selector row -->
+                <LinearLayout
+                    android:id="@+id/language_selector"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:id="@+id/current_language"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="?android:attr/colorAccent"
+                        android:textSize="@dimen/welcome_language_text_size"
+                        android:fontFamily="@font/google_sans"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/language_chevron"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@drawable/ic_chevron_right"
+                        android:autoMirrored="true"
+                        android:contentDescription="@null" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Bottom button row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="24dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/launch_accessibility"
+                    android:layout_width="@dimen/welcome_footer_button_size"
+                    android:layout_height="@dimen/welcome_footer_button_size"
+                    app:cornerRadius="@dimen/welcome_footer_button_radius"
+                    app:backgroundTint="@android:color/transparent"
+                    app:strokeColor="?android:attr/textColorPrimary"
+                    app:strokeWidth="1.5dp"
+                    app:icon="@drawable/ic_accessibility"
+                    app:iconTint="?android:attr/textColorPrimary"
+                    app:iconSize="@dimen/welcome_accessibility_icon_size"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    android:padding="0dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:contentDescription="@string/accessibility_settings" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/start"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/welcome_footer_button_size"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/welcome_footer_button_spacing"
+                    app:cornerRadius="@dimen/welcome_footer_button_radius"
+                    app:backgroundTint="?android:attr/colorAccent"
+                    android:textColor="?android:attr/textColorPrimaryInverse"
+                    app:iconTint="?android:attr/textColorPrimaryInverse"
+                    app:icon="@drawable/ic_arrow_forward"
+                    app:iconGravity="textStart"
+                    app:iconPadding="@dimen/welcome_start_button_icon_padding"
+                    app:iconSize="@dimen/welcome_start_button_icon_size"
+                    android:textSize="@dimen/welcome_start_button_text_size"
+                    android:text="@string/start"
+                    android:textAllCaps="false"
+                    android:fontFamily="@font/google_sans"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp" />
+            </LinearLayout>
+
         </LinearLayout>
-    </LinearLayout>
-</com.google.android.setupdesign.GlifLayout>
+    </ScrollView>
+</FrameLayout>
