@@ -25,7 +25,8 @@ class SetupWizardActivity : AppCompatActivity() {
         if (LOGV) {
             Log.v(TAG, "onCreate savedInstanceState=$savedInstanceState")
         }
-        if (SetupWizardUtils.hasLeanback(this) && SetupWizardUtils.hasGMS(this)) {
+        if (SetupWizardUtils.hasGMS(this)) {
+            SetupWizardUtils.disableHome(this)
             finish()
             return
         }

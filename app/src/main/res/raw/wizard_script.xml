@@ -15,7 +15,7 @@
 <WizardScript wizard:version="2"
   xmlns:wizard="http://schemas.android.com/apk/res/com.google.android.setupwizard">
     <WizardAction wizard:uri="intent:#Intent;action=com.android.setupwizard.OEM_PRE_SETUP;end" id="oem_pre_setup" />
-    <WizardAction wizard:uri="intent:#Intent;package=com.google.android.setupwizard;action=com.android.setupwizard.WELCOME;end" id="welcome">
+    <WizardAction wizard:uri="intent:#Intent;package=org.lineageos.setupwizard;action=org.lineageos.setupwizard.LINEAGE_WELCOME;end" id="welcome">
         <result wizard:action="check_user_unlock_qr" wizard:name="start_qr_provision" wizard:resultCode="101" />
         <result wizard:action="check_user_unlock_dpm_user_complete" wizard:name="dpm_user_complete" wizard:resultCode="111" />
         <result wizard:action="check_user_unlock_dpm_user_complete" wizard:name="dpm_profile_complete" wizard:resultCode="112" />

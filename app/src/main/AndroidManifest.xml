@@ -80,7 +80,7 @@
             android:windowSoftInputMode="stateAlwaysHidden"
             android:theme="@style/NoDisplay">
 
-            <intent-filter android:priority="9">
+            <intent-filter android:priority="3">
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.DEVICE_INITIALIZATION_WIZARD" />
                 <category android:name="android.intent.category.HOME" />
@@ -107,7 +107,8 @@
             android:theme="@style/Theme.Setup.Welcome"
             android:configChanges="mcc|mnc"
             android:immersive="true"
-            android:exported="false"
+            android:directBootAware="true"
+            android:exported="true"
             android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="org.lineageos.setupwizard.LINEAGE_WELCOME" />

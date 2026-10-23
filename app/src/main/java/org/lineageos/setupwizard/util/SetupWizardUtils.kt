@@ -134,7 +134,15 @@ object SetupWizardUtils {
     }
 
     fun isPackageInstalled(context: Context, packageName: String): Boolean =
-        runCatching { context.packageManager.getPackageInfo(packageName, GET_ACTIVITIES) }.isSuccess
+        runCatching {
+                context.packageManager.getPackageInfo(
+                    packageName,
+                    GET_ACTIVITIES or
+                        PackageManager.MATCH_DIRECT_BOOT_AWARE or
+                        PackageManager.MATCH_DIRECT_BOOT_UNAWARE,
+                )
+            }
+            .isSuccess
 
     private fun restoreWallpaperColorSource(contentResolver: ContentResolver) {
         val overlayPackages =
@@ -233,7 +241,15 @@ object SetupWizardUtils {
                 addCategory("android.intent.category.HOME")
                 setPackage(context.packageName)
             }
-        val comp = intent.resolveActivity(context.packageManager)
+        val comp =
+            context.packageManager
+                .resolveActivity(
+                    intent,
+                    PackageManager.MATCH_DIRECT_BOOT_AWARE or
+                        PackageManager.MATCH_DIRECT_BOOT_UNAWARE,
+                )
+                ?.activityInfo
+                ?.componentName
         if (LOGV) {
             Log.v(TAG, "resolveActivity for intent=$intent returns $comp")
         }
