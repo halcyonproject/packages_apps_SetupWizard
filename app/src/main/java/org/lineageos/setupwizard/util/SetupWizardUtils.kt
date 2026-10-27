@@ -54,7 +54,7 @@ object SetupWizardUtils {
     private const val GMS_PACKAGE = "com.google.android.gms"
     private const val GMS_SUW_PACKAGE = "com.google.android.setupwizard"
     private const val GMS_TV_SUW_PACKAGE = "com.google.android.tungsten.setupwraith"
-    private const val UPDATER_PACKAGE = "org.lineageos.updater"
+    private const val UPDATER_PACKAGE = "org.hlcyn.updater"
 
     private const val UPDATE_RECOVERY_EXEC = "/vendor/bin/install-recovery.sh"
     private const val CONFIG_HIDE_RECOVERY_UPDATE = "config_hideRecoveryUpdate"
